@@ -1,0 +1,15 @@
+.task {
+	border-radius: 5px;
+	padding: 0;
+	/* background: #ecedf0; */
+    background-color: #23374d;
+	margin: .5em 0;
+	font-size: 1em;
+	color: white;
+}
+
+.task-title {
+	cursor: pointer;
+	margin: 1em;
+	padding: .5em 0;
+}

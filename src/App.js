@@ -11,10 +11,9 @@ function App() {
         <Navigation />
         
         <Switch>
-
           <Route  path="/" component={Homepage} />
-
         </Switch>
+        
       </Router>
     </div>
   );

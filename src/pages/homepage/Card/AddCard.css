@@ -1,0 +1,23 @@
+.empty-card {
+	opacity: 0.8;
+	min-width: 9em;
+	width: 9em;
+	outline: none;
+	border: none;
+}
+
+.empty-card:focus-within {
+	min-width: 20em;
+	width: 20em;
+}
+
+
+.addCard-input {
+	width: 100%;
+	outline: none;
+	border: none;
+	padding: 1em;
+	border-radius: 5px;
+	background-color: #23374d;
+	color: #fff;
+}
