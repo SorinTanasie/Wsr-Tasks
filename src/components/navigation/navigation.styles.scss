@@ -1,0 +1,12 @@
+.navigation{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 80px;
+    background-color: purple;
+    color: wheat;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
