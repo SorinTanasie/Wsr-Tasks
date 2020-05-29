@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './Task.css';
-
+import TaskModal from './TaskModal/TaskModal';
 
 const Task = ({index, removeTask, task}) => {
 
@@ -8,7 +8,7 @@ const Task = ({index, removeTask, task}) => {
 
     const handleOpenModal = e => {
         openTaskModal(e.target);
-        console.log('opened: ' + e.target);
+        // console.log('opened: ' + e.target);
     }
 
     const handleCloseModal = e => {
@@ -18,6 +18,14 @@ const Task = ({index, removeTask, task}) => {
 
     return (
         <div>
+
+            <TaskModal 
+                title={task.title}
+                selectedTask={selectedTask}
+                handleCloseModal={handleCloseModal}
+                index={index}
+                removeTask={removeTask}
+            />
 
             <div className="task">
                 <p 
