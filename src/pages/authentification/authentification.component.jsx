@@ -1,6 +1,7 @@
 import React from "react";
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/button/button.component";
+import SignUp from './sign-up/sign-up.component';
 
 import './authentification.styles.scss'
 
@@ -31,7 +32,11 @@ const Authentification = () => (
           value="Submit"
         >AASDDASDASD</CustomButton>
       </form>
+
+      <SignUp/>
     </div>
+
+
   
 );
 

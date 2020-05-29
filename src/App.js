@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Navigation from './components/navigation/navigation.component';
 import {auth} from './firebase/firebase.utils'
 import Homepage from './pages/homepage/homepage.component';
@@ -8,6 +8,17 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user=>{
+      setUser({currentUser:user});
+    })
+  
+  })
   return (
     <div className="App">
       <Router>
