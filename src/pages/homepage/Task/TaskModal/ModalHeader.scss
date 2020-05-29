@@ -1,0 +1,23 @@
+.modalHeader {
+    border-bottom: 1px solid grey;
+    margin: 1em;
+}
+
+.close-modal, .remove-modal, .icon {
+    border: none;
+    background: none;
+    font-size: 1.7em;
+    outline: none;
+    margin: .2em;
+    color: grey;
+
+}
+
+.icon:hover {
+    color: lightgrey;
+    cursor: pointer;
+}
+
+.icon:active {
+    color: #5d6b81;
+}
