@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import Navigation from './components/navigation/navigation.component';
-import {auth} from './firebase/firebase.utils'
+import {auth} from './firebase/firebase'
 import Homepage from './pages/homepage/homepage.component';
 import Analitics from './pages/analitics/analitics.component';
 import Authentification from './pages/authentification/authentification.component'
