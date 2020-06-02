@@ -9,28 +9,32 @@ import './App.css';
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   
 
   useEffect(() => {
     auth.onAuthStateChanged(user=>{
-      setUser({currentUser:user});
+      setUser({user});
     })
   
-  })
+  },[])
   return (
     <div className="App">
+      {console.log(user)}
+      {user?
+      (
       <Router>
         <Navigation />
         
         <Switch>
           <Route exact path="/homepage" component={Homepage} />
           <Route exact path="/analitics" component={Analitics} />
-          <Route exact path="/authentification" component={Authentification} />
         </Switch>
         
-      </Router>
+      </Router>)
+      : (<Authentification/>)}
+      
     </div>
   );
 }
