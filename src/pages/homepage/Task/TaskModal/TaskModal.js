@@ -13,7 +13,7 @@ const TaskModal = ({index, removeTask, title, selectedTask, handleCloseModal}) =
         const newDescription = e.target.parentNode.parentNode.childNodes[0].value;
 
 
-        if(existingDescription != newDescription) {
+        if(existingDescription !== newDescription) {
             console.log(existingDescription);
             console.log(newDescription);
 

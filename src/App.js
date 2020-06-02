@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
 
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({user: null});
 
   
 
@@ -22,7 +22,8 @@ function App() {
   return (
     <div className="App">
       {console.log(user)}
-      {user?
+      {user.user === null? console.log("nu e"):console.log('e ceva')}
+      {user.user !== null?
       (
       <Router>
         <Navigation />

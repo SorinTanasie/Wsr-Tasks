@@ -1,39 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 
 import FormInput from "../../../components/form-input/form-input.component";
 import CustomButton from "../../../components/button/button.component";
 
+import { auth } from "../../../firebase/firebase";
+
 import "./sign-in.styles.scss";
 
 const SignIn = () => {
+  const [userr, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = userr;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setUser({ email: "", password: "", error: "" });
+    } catch (error) {
+      setUser({ error: "eroare" });
+    }
+  };
+
+  const handleChange = e => {
+    const { value, name } = e.target;
+
+    setUser({...userr, [name]: value })
+  };
   return (
     <div>
       <h2>Sign in</h2>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <FormInput
-          name="email"
           type="email"
-          value={""}
-          handleChange={""}
-          input="input"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          label="email"
           required
-          label="Email"
-        />
+        ></FormInput>
         <FormInput
-          name="password"
           type="password"
-          input="input"
-          value={""}
-          handleChange={""}
-          required
+          name="password"
+          value={password}
+          onChange={handleChange}
           label="password"
-        />
+          required
+        ></FormInput>
+
         <CustomButton type="submit" value="Submit">
           AASDDASDASD
         </CustomButton>
       </form>
     </div>
-    
   );
 };
 

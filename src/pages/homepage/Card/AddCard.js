@@ -9,7 +9,7 @@ const AddCard = ({addCard}) => {
         e.preventDefault();
         
         if(!value) return;
-        if(value.trim() == '') return;
+        if(value.trim() === '') return;
         addCard(value);
         setValue('');
     }
