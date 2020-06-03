@@ -32,6 +32,10 @@ const SignUp =() => {
 
             await createUserProfileDocument(user,{displayName});
 
+            user.updateProfile({
+                displayName: displayName
+            })
+
             setUser({
                 ...userr,
                 displayName: '',
@@ -40,9 +44,12 @@ const SignUp =() => {
                 confirmPassword:''
 
             })
+
         }catch(error){
             console.log(error);
         }
+
+        
     }
 
     const handleChange = e =>{
