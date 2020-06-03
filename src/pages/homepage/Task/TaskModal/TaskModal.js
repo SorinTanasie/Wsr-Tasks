@@ -19,6 +19,7 @@ const TaskModal = ({index, removeTask, title, selectedTask, handleCloseModal}) =
 
             console.log('saved!');
             setDescription(newDescription);
+            handleCloseModal();
         } else {
             console.log('already saved!');
         }

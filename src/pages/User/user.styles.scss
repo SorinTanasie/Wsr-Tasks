@@ -1,24 +1,35 @@
-.user{
+.about-user{
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    
-    img{
-        width: 200px!important;
+    width: 100%;
+    justify-content: space-evenly;
 
-        height: 200px!important;
-        border: 5px solid black;
-        border-radius: 100%;
-        margin:40px 0;
+    h2{
+        margin-top:5em;
     }
-    h4{
-        position: absolute;
-        right: 30px;
-        top: 0;
+    .user{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
+        
+        img{
+            width: 200px!important;
+
+            height: 200px!important;
+            border: 5px solid black;
+            border-radius: 100%;
+            margin:40px 0;
+        }
+        h4{
+            position: absolute;
+            right: 30px;
+            top: 0;
+            cursor: pointer;
+        }
+
+        .profile{
+            margin-bottom: 8%;
+        }
     }
 
-    .profile{
-        margin-bottom: 8%;
-    }
 }

@@ -6,7 +6,7 @@ import './Card.css';
 
 const Card = ({card}) => {
 
-    const [tasks, setTask] = useState([{title: 'test'}]);
+    const [tasks, setTask] = useState([{}]);
 
 
     const addTask = (title) => {

@@ -1,10 +1,14 @@
 .homepage {
-	margin-left: 5em;
+	margin-left: 5.5em;
+	.title{
+		text-align: left!important;
+	}
 }
 
 .board {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	margin-right: 10em;
 	width: 100%;
 }

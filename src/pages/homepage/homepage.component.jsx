@@ -22,7 +22,7 @@ const Homepage = () => {
 
   	return (
     	<div className="homepage">
-
+			<h1 className="title">Tasks</h1>
 			<div className="board">
 				{
 					cards.map((card, index) => (

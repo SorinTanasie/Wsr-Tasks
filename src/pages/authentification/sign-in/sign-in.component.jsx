@@ -52,7 +52,7 @@ const SignIn = () => {
         ></FormInput>
 
         <CustomButton type="submit" value="Submit">
-          AASDDASDASD
+          Sign in
         </CustomButton>
       </form>
     </div>

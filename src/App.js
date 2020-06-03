@@ -27,7 +27,7 @@ function App() {
       {user.user !== null?
       (
       <Router>
-        <Navigation displayName={user.user.displayName} />
+        <Navigation displayName={user.user.displayName} photoUrl={user.user.photoUrl} />
         
         <Switch>
           <Route exact path="/" component={Homepage} />
