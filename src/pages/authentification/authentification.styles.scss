@@ -1,16 +1,98 @@
 .authentification{
-    margin: 0 auto;
     display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 30px;
-
+    justify-content: center;
+    width: 70%;
+    max-width: 900px;
+    height: 67%;
+    position: absolute;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color:#f5f5f5;
     .switch-active{
         display: none;
     }
+    .container{
+        width: 65%;
+        right: 35%;
+        position: absolute;
+        transition: 1s;
+        height: 100%;
+        padding: 0 20px;
+        
+        .anim{
+            animation: 0.4s opacity2 ease-in-out;
+        @keyframes opacity2 {
+            from{opacity: 0;}
+
+            to{opacity: 1;}
+        }
+
+            &:nth-child(1){
+                padding:16% 0;
+            }
+        }
+    }
+    
 
     h3{
         color: royalblue;
         cursor: pointer;
     }
+    .switch-container{
+        width: 35%;
+        height: 100%;
+        background-color: black;
+        text-align: center;
+        right: 65%;
+        transition: 1s;
+        position: absolute;
+        border-radius: 20px;
+        
+
+        .left-container, .right-container{
+            padding: 40% 5px;
+            p{
+                color: white;
+            }
+            button{
+                color: white;
+                border: 2px solid white;
+                border-radius: 25px;
+                padding: 10px 15px;
+                background-color: black;
+            }
+
+            animation: 0.9s opacity ease-in-out;
+        @keyframes opacity {
+            from{opacity: 0;}
+            to{opacity: 1;}
+        }
+        }
+    }
+    .left{
+        
+        animation: 1s mymove ease;
+        @keyframes mymove {
+            from {right: 65%}
+            to {right: 0}
+        }
+        right: 0;
+        
+    }
+    .right{
+        animation: 1s mymove2 ease;
+        
+        
+        @keyframes mymove2 {
+            from {right: 35%}
+            to {right: 0}
+        }
+        right: 0;
+    }
+    
+    
+    
 }
+
