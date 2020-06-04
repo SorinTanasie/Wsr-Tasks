@@ -41,10 +41,33 @@ const Card = ({card}) => {
 
 	}
 
-    const removeTask = (index) => {
-        const newTask = [...tasks];
-        newTask.splice(index, 1);
-        setTask(newTask);
+    const removeTask = (id) => {
+        // const newTask = [...tasks];
+        // newTask.splice(index, 1);
+        // setTask(newTask);
+
+        // const gameID = parseInt(e.target.parentNode.parentNode.id);
+		const docRef = firestore.collection('tasks');
+
+
+		docRef.onSnapshot(querySnapshot => {
+			querySnapshot.forEach(doc => {
+				if(doc.data().id === id) {
+                    console.log(doc.data().id);
+					let key = doc.id;
+
+					docRef.doc(key).delete().then(() => {
+						console.log('deleted: ', key);
+					}).catch(err => {
+						console.log('error');
+					})
+
+				};
+			});			
+		});
+
+   
+
     }
 
     return(
@@ -59,7 +82,7 @@ const Card = ({card}) => {
                         tasks.map((task, index) => (
                         <Task 
                             key={index} 
-                            index={index} 
+                            index={task.id} 
                             task={task} 
                             removeTask={removeTask} 
                         />))

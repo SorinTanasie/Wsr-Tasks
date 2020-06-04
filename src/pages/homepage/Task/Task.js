@@ -32,7 +32,7 @@ const Task = ({index, removeTask, task}) => {
                     onClick={handleOpenModal} 
                     className="task-title"
                 >
-                    {task.title ? 'task.title' : ''}
+                    {task.title ? task.title : ''}
                 </p>
             </div>
 
