@@ -6,17 +6,19 @@ import AddCard from './Card/AddCard';
 import Card from './Card/Card';
 
 import {firestore} from '../../firebase/firebase';
-const Homepage = () => {
+const Homepage = ({user}) => {
 
 	const [cards, setCard] = useState([
 		{
 			title: 'test'
 		}
 	]);
-
+	const {uid} = user;
+	const docRef = firestore.collection('users').doc(uid).collection('cards')
 
 	useEffect(() => {
-		const docRef = firestore.collection('cards');
+		const {uid} = user;
+		const docRef = firestore.collection('users').doc(uid).collection('cards');
 		
 		docRef.onSnapshot(querySnapshot => {
 			const cardsArray = [];
@@ -36,7 +38,7 @@ const Homepage = () => {
 			const newCards = [...cards, {title}];
 			setCard(newCards);
 
-			firestore.collection("cards").add({title}).then(docRef => {
+			docRef.add({title}).then(docRef => {
 				console.log('card written with id: ', docRef.id);;
 			}).catch(err => {
 				console.log('error: ', err);
@@ -56,6 +58,7 @@ const Homepage = () => {
 					<Card 
 						key={index} 
 						card={card}
+						ref={docRef}
 					/>))
 				}
 

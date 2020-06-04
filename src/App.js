@@ -24,19 +24,15 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
       
       {user.user === null? console.log("nu e"):console.log('e ceva')}
-=======
- 
->>>>>>> f07bc3435efb88a7004f88aaec988869527fcf05
       {user.user !== null?
       (
       <Router>
         <Navigation displayName={user.user.displayName} photoUrl={user.user.photoUrl} />
         
         <Switch>
-          <Route exact path="/" component={Homepage} />
+          <Route exact path="/" render={()=>(<Homepage user={user.user}/>)}/>
           <Route exact path="/analitics" component={Analitics} />
           <Route exact path="/user" render={()=>(<User user={user.user}/>)}/>
         </Switch>
