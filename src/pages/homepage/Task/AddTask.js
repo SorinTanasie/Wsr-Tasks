@@ -8,7 +8,7 @@ const AddTask = ({addTask, placeholder}) => {
     const handleSubmitTask = (e) => {
         e.preventDefault();
         
-        addTask(value);
+        addTask(value, Date.now());
         setValue('');
 
     }

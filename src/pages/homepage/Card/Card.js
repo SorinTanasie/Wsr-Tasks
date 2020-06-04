@@ -1,26 +1,73 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Task from '../Task/Task';
 import AddTask from '../Task/AddTask'; 
 import './Card.css';
 
+import {firestore} from '../../../firebase/firebase';
 
 const Card = ({card}) => {
 
     const [tasks, setTask] = useState([{}]);
 
 
-    const addTask = (title) => {
-		const newTask = [...tasks, {title}];
-        if(title.trim() !== '') {
-		    setTask(newTask);
-        }
-		console.log('add task: ' + title);
+	useEffect(() => {
+		const docRef = firestore.collection('tasks');
+		
+		docRef.onSnapshot(querySnapshot => {
+			const tasksArray = [];
+
+			querySnapshot.forEach(doc => {
+
+				tasksArray.push(doc.data());
+			})
+			setTask(tasksArray);
+		})
+	}, [])
+
+
+    const addTask = (title, id) => {
+
+			const newTask = [...tasks, {title, id}];
+
+             if(title.trim() !== '') {
+                setTask(newTask);
+
+                firestore.collection("tasks").add({title, id}).then(docRef => {
+				    console.log('task written with id: ', docRef.id);;
+                }).catch(err => {
+                    console.log('error: ', err);
+                })
+            }
+
 	}
 
-    const removeTask = (index) => {
-        const newTask = [...tasks];
-        newTask.splice(index, 1);
-        setTask(newTask);
+    const removeTask = (id) => {
+        // const newTask = [...tasks];
+        // newTask.splice(index, 1);
+        // setTask(newTask);
+
+        // const gameID = parseInt(e.target.parentNode.parentNode.id);
+		const docRef = firestore.collection('tasks');
+
+
+		docRef.onSnapshot(querySnapshot => {
+			querySnapshot.forEach(doc => {
+				if(doc.data().id === id) {
+                    console.log(doc.data().id);
+					let key = doc.id;
+
+					docRef.doc(key).delete().then(() => {
+						console.log('deleted: ', key);
+					}).catch(err => {
+						console.log('error');
+					})
+
+				};
+			});			
+		});
+
+   
+
     }
 
     return(
@@ -35,7 +82,7 @@ const Card = ({card}) => {
                         tasks.map((task, index) => (
                         <Task 
                             key={index} 
-                            index={index} 
+                            index={task.id} 
                             task={task} 
                             removeTask={removeTask} 
                         />))

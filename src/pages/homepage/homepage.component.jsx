@@ -1,10 +1,11 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './homepage.styles.scss';
 
 import AddCard from './Card/AddCard';
 import Card from './Card/Card';
 
+import {firestore} from '../../firebase/firebase';
 const Homepage = () => {
 
 	const [cards, setCard] = useState([
@@ -14,10 +15,36 @@ const Homepage = () => {
 	]);
 
 
+	useEffect(() => {
+		const docRef = firestore.collection('cards');
+		
+		docRef.onSnapshot(querySnapshot => {
+			const cardsArray = [];
+
+			querySnapshot.forEach(doc => {
+
+				cardsArray.push(doc.data());
+			})
+			setCard(cardsArray);
+		})
+	}, [])
+
+
 	const addCard = (title) => {
-		const newCard = [...cards, {title}];
-		setCard(newCard);
-		console.log('add card:' + title);
+
+		if(title.length !== 0) {
+			const newCards = [...cards, {title}];
+			setCard(newCards);
+
+			firestore.collection("cards").add({title}).then(docRef => {
+				console.log('card written with id: ', docRef.id);;
+			}).catch(err => {
+				console.log('error: ', err);
+			})
+		} else {
+			console.log('error: empty input');
+		}
+
 	}
 
   	return (

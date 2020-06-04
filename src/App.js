@@ -24,8 +24,12 @@ function App() {
 
   return (
     <div className="App">
+<<<<<<< HEAD
       
       {user.user === null? console.log("nu e"):console.log('e ceva')}
+=======
+ 
+>>>>>>> f07bc3435efb88a7004f88aaec988869527fcf05
       {user.user !== null?
       (
       <Router>
