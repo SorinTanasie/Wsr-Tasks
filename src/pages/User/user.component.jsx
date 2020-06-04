@@ -5,7 +5,7 @@ import './user.styles.scss'
 
 const User = ({user}) =>{
     
-    const {displayName,email,phoneNumber,photoUrl} = user;
+    const {displayName,email,phoneNumber,photoUrl,uid} = user;
 
     const logOut = () =>{
         auth.signOut();
@@ -21,6 +21,7 @@ const User = ({user}) =>{
                     <h5>Nume:{displayName}</h5>
                     <h5>Email:{email}</h5>
                     <h5>Telefon:{phoneNumber}</h5>
+                    {console.log(uid)}
                 </div>
             </div>
             <div className="organizatie">
