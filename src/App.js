@@ -22,8 +22,7 @@ function App() {
   },[])
   return (
     <div className="App">
-      {console.log(user)}
-      {user.user === null? console.log("nu e"):console.log('e ceva')}
+ 
       {user.user !== null?
       (
       <Router>
