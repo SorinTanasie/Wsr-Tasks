@@ -52,6 +52,24 @@ const Homepage = ({user}) => {
 		}
 
 	}
+	// const removeCard = (index) => {
+
+	// 	docRef.onSnapshot(querySnapshot => {
+	// 		querySnapshot.forEach(doc => {
+	// 			if(doc.data().id === id) {
+    //                 console.log(doc.data().id);
+	// 				let key = doc.id;
+
+	// 				docRef.doc(key).delete().then(() => {
+	// 					console.log('deleted: ', key);
+	// 				}).catch(err => {
+	// 					console.log('error');
+	// 				})
+
+	// 			};
+	// 		});			
+	// 	});
+    // }
 
   	return (
     	<div className="homepage">

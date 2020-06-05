@@ -51,7 +51,7 @@ const Card = ({card,uid,id}) => {
         // setTask(newTask);
 
         // const gameID = parseInt(e.target.parentNode.parentNode.id);
-		const docRef = firestore.collection('tasks');
+		
 
 
 		docRef.onSnapshot(querySnapshot => {
