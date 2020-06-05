@@ -5,13 +5,17 @@ import './Card.css';
 
 import {firestore} from '../../../firebase/firebase';
 
-const Card = ({card}) => {
+const Card = ({card,uid,id}) => {
 
-    const [tasks, setTask] = useState([{}]);
-
-
+    const [tasks, setTask] = useState([]);
+    
+    console.log(id)
+    console.log(card)
+    const docRef = firestore.collection('users').doc(uid).collection('cards').doc(id).collection('tasks');
+    
 	useEffect(() => {
-		const docRef = firestore.collection('tasks');
+        console.log(id)
+		
 		
 		docRef.onSnapshot(querySnapshot => {
 			const tasksArray = [];
@@ -32,7 +36,7 @@ const Card = ({card}) => {
              if(title.trim() !== '') {
                 setTask(newTask);
 
-                firestore.collection("tasks").add({title, id}).then(docRef => {
+                docRef.add({title, id}).then(docRef => {
 				    console.log('task written with id: ', docRef.id);;
                 }).catch(err => {
                     console.log('error: ', err);

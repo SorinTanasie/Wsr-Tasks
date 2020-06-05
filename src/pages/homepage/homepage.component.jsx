@@ -9,35 +9,39 @@ import {firestore} from '../../firebase/firebase';
 const Homepage = ({user}) => {
 
 	const [cards, setCard] = useState([
-		{
-			title: 'test'
-		}
+		
 	]);
 	const {uid} = user;
-	const docRef = firestore.collection('users').doc(uid).collection('cards')
-
+	const docRef = firestore.collection('users').doc(uid).collection('cards');
+	console.log(docRef)
+	console.log(cards);
 	useEffect(() => {
 		const {uid} = user;
 		const docRef = firestore.collection('users').doc(uid).collection('cards');
-		
-		docRef.onSnapshot(querySnapshot => {
-			const cardsArray = [];
 
-			querySnapshot.forEach(doc => {
+		const getTasks = async(docRef) =>{
+			const docReff = await docRef;
+			docReff.onSnapshot(querySnapshot => {
+				const cardsArray = [];
 
-				cardsArray.push(doc.data());
+				querySnapshot.forEach(doc => {
+					cardsArray.push({
+						title: doc.data().title,
+						id:doc.id});
+					
+				})
+				setCard(cardsArray);
 			})
-			setCard(cardsArray);
-		})
+		}
+		getTasks(docRef);
 	}, [])
 
 
-	const addCard = (title) => {
+	const addCard = async (title) => {
 
 		if(title.length !== 0) {
 			const newCards = [...cards, {title}];
-			setCard(newCards);
-
+			
 			docRef.add({title}).then(docRef => {
 				console.log('card written with id: ', docRef.id);;
 			}).catch(err => {
@@ -58,7 +62,8 @@ const Homepage = ({user}) => {
 					<Card 
 						key={index} 
 						card={card}
-						ref={docRef}
+						id={card.id}
+						uid={uid}
 					/>))
 				}
 
