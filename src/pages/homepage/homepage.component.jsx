@@ -13,8 +13,6 @@ const Homepage = ({user}) => {
 	]);
 	const {uid} = user;
 	const docRef = firestore.collection('users').doc(uid).collection('cards');
-	console.log(docRef)
-	console.log(cards);
 	useEffect(() => {
 		const {uid} = user;
 		const docRef = firestore.collection('users').doc(uid).collection('cards');
@@ -52,24 +50,22 @@ const Homepage = ({user}) => {
 		}
 
 	}
-	// const removeCard = (index) => {
+	const removeCard = (id) => {
+		docRef.onSnapshot(querySnapshot => {
+			querySnapshot.forEach(doc => {
+				if(doc.id === id) {
+					let key = doc.id;
 
-	// 	docRef.onSnapshot(querySnapshot => {
-	// 		querySnapshot.forEach(doc => {
-	// 			if(doc.data().id === id) {
-    //                 console.log(doc.data().id);
-	// 				let key = doc.id;
+					docRef.doc(key).delete().then(() => {
+						console.log('deleted: ', key);
+					}).catch(err => {
+						console.log('error');
+					})
 
-	// 				docRef.doc(key).delete().then(() => {
-	// 					console.log('deleted: ', key);
-	// 				}).catch(err => {
-	// 					console.log('error');
-	// 				})
-
-	// 			};
-	// 		});			
-	// 	});
-    // }
+				};
+			});			
+		});
+    }
 
   	return (
     	<div className="homepage">
@@ -82,6 +78,7 @@ const Homepage = ({user}) => {
 						card={card}
 						id={card.id}
 						uid={uid}
+						removeCard={removeCard}
 					/>))
 				}
 

@@ -6,7 +6,7 @@ import ModalHeader from './ModalHeader';
 
 const TaskModal = ({index, removeTask, title, selectedTask, handleCloseModal}) => {
 
-    const [description, setDescription] = useState('test');
+    const [description, setDescription] = useState();
 
     const handleEditDescription = e => {
         const existingDescription = e.target.parentNode.parentNode.childNodes[0].textContent;

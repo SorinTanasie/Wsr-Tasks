@@ -5,16 +5,13 @@ import './Card.css';
 
 import {firestore} from '../../../firebase/firebase';
 
-const Card = ({card,uid,id}) => {
+const Card = ({card,uid,id,removeCard}) => {
 
     const [tasks, setTask] = useState([]);
     
-    console.log(id)
-    console.log(card)
     const docRef = firestore.collection('users').doc(uid).collection('cards').doc(id).collection('tasks');
     
 	useEffect(() => {
-        console.log(id)
 		
 		
 		docRef.onSnapshot(querySnapshot => {
@@ -57,7 +54,6 @@ const Card = ({card,uid,id}) => {
 		docRef.onSnapshot(querySnapshot => {
 			querySnapshot.forEach(doc => {
 				if(doc.data().id === id) {
-                    console.log(doc.data().id);
 					let key = doc.id;
 
 					docRef.doc(key).delete().then(() => {
@@ -78,8 +74,7 @@ const Card = ({card,uid,id}) => {
         <div className="card non-empty-card">
             <div className="card-content">
                 <h1 className="card-title">{card.title}</h1>
-
-
+                <i className="far fa-trash-alt" onClick={()=>{removeCard(card.id)}}></i>
                 
                 <div className="tasks">
                     {
