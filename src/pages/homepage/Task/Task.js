@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import './Task.css';
 import TaskModal from './TaskModal/TaskModal';
 
-const Task = ({index, removeTask, task}) => {
+const Task = ({index, removeTask, task,modifyTaskDate,modifyTaskDescription,baseId,uid,id}) => {
 
     const [selectedTask, openTaskModal] = useState(false);
+    console.log(uid,id)
 
     const handleOpenModal = e => {
         openTaskModal(e.target);
@@ -25,6 +26,11 @@ const Task = ({index, removeTask, task}) => {
                 handleCloseModal={handleCloseModal}
                 index={index}
                 removeTask={removeTask}
+                modifyTaskDescription={modifyTaskDescription}
+                modifyTaskDate={modifyTaskDate}
+                uid={uid}
+                id={id}
+                baseId={baseId}
             />
 
             <div className="task">

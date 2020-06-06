@@ -1,6 +1,15 @@
 .modalHeader {
     border-bottom: 1px solid grey;
     margin: 1em;
+    position: relative;
+
+    .fa-trash-alt{
+        color: black;
+
+        &:hover{
+            color: lightgrey;
+        }
+    }
 }
 
 .close-modal, .remove-modal, .icon {

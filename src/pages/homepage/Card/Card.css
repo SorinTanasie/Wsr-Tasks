@@ -12,6 +12,7 @@
 	max-height: 80vh;
 	overflow: hidden;
 	overflow-y: auto;
+	position: relative;
 }
 
 .non-empty-card {
@@ -33,4 +34,8 @@
 }
 .fa-trash-alt{
 	cursor: pointer;
+	position: absolute;
+	top:10px;
+	right: 10px;
+	color: white;
 }
