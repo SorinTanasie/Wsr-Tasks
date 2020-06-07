@@ -27,22 +27,32 @@ const TaskModal = ({
       {value? value : 'Due Date'} 
     </button>
   );
+ 
   useEffect(() => {
-		
+
+    if(baseId){
+    
+	
     const docRef = firestore.collection('users').doc(uid).collection('cards').doc(id).collection('tasks').doc(baseId);
-    docRef.onSnapshot(querySnapshot => {
         
-        console.log(querySnapshot)
+         docRef.onSnapshot(querySnapshot => {
+        
+        if(querySnapshot.exists){
         // querySnapshot.forEach(doc => {
 
         //     tasksArray.push(doc.data());
         // })
         setDescription(querySnapshot.data().description);
+        if(querySnapshot.data().dueDate){
         let time = querySnapshot.data().dueDate.toDate();
         setStartDate(time);
-        
+        }
+    }
         
     })
+
+    
+}
 }, [])
 
 
