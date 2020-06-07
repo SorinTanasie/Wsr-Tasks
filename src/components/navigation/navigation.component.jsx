@@ -2,9 +2,10 @@ import React from 'react';
 import './navigation.styles.scss';
 import {Link} from 'react-router-dom';
 
-const Navigation =({displayName,photoUrl}) =>{
-
-
+const Navigation =({user}) =>{
+    const {displayName,photoUrl} = user;
+    console.log(user);
+    console.log(displayName);
     return(
         <div className="navigation">
             <Link to="/user" className="profil"><img src={photoUrl} alt=""/>{displayName}</Link>

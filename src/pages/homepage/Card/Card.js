@@ -9,29 +9,29 @@ const Card = ({card,uid,id,removeCard}) => {
 
     const [tasks, setTask] = useState([]);
     
-    const docRef = firestore.collection('users').doc(uid).collection('cards').doc(id).collection('tasks');
+    const docRef = firestore.collection('users').doc(uid).collection('cards').doc(card.id).collection('tasks');
     
 	useEffect(() => {
 		
-		
+		const getTasks=async ()=>{
 		docRef.onSnapshot(querySnapshot => {
-			const tasksArray = [];
-
+			let tasksArray = [];
+            console.log(querySnapshot);
 			querySnapshot.forEach(doc => {
 
 				tasksArray.push(doc.data());
-			})
-			setTask(tasksArray);
-		})
+            })
+            console.log(tasksArray);
+            setTask(tasksArray);
+        })
+    }
+        getTasks();
 	}, [])
 
 
     const addTask = (title, id) => {
 
-			const newTask = [...tasks, {title, id}];
-
              if(title.trim() !== '') {
-                setTask(newTask);
 
                 docRef.add({title, id}).then(docRef => {
                     console.log('task written with id: ', docRef.id);
@@ -117,9 +117,9 @@ const Card = ({card,uid,id,removeCard}) => {
                 
                 <div className="tasks">
                     {
-                        tasks.map((task, index) => (
+                        tasks.map(task => (
                         <Task 
-                            key={index} 
+                            key={task.id} 
                             index={task.id} 
                             id={id}
                             uid={uid}

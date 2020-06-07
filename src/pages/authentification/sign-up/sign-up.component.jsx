@@ -29,12 +29,12 @@ const SignUp =() => {
 
         try{
             const {user} = await auth.createUserWithEmailAndPassword(email,password);
-
-            await createUserProfileDocument(user,{displayName});
-
-            user.updateProfile({
+            await user.updateProfile({
                 displayName: displayName
             })
+            await createUserProfileDocument(user);
+
+            
 
             setUser({
                 ...userr,
@@ -44,6 +44,8 @@ const SignUp =() => {
                 confirmPassword:''
 
             })
+            
+            console.log(user)
 
         }catch(error){
             console.log(error);

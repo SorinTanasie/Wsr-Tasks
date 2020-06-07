@@ -29,6 +29,7 @@ const Homepage = ({user}) => {
 					
 				})
 				setCard(cardsArray);
+				console.log('mounted')
 			})
 		}
 		getTasks(docRef);
@@ -38,9 +39,8 @@ const Homepage = ({user}) => {
 	const addCard = async (title) => {
 
 		if(title.length !== 0) {
-			const newCards = [...cards, {title}];
 			
-			docRef.add({title}).then(docRef => {
+			await docRef.add({title}).then(docRef => {
 				console.log('card written with id: ', docRef.id);;
 			}).catch(err => {
 				console.log('error: ', err);
@@ -51,6 +51,7 @@ const Homepage = ({user}) => {
 
 	}
 	const removeCard = (id) => {
+
 		docRef.onSnapshot(querySnapshot => {
 			querySnapshot.forEach(doc => {
 				if(doc.id === id) {
@@ -71,10 +72,11 @@ const Homepage = ({user}) => {
     	<div className="homepage">
 			<h1 className="title">Tasks</h1>
 			<div className="board">
+				{console.log(cards)}
 				{
-					cards.map((card, index) => (
+					cards.map(card => (
 					<Card 
-						key={index} 
+						key={card.id}
 						card={card}
 						id={card.id}
 						uid={uid}

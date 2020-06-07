@@ -6,7 +6,8 @@ import './user.styles.scss'
 const User = ({user}) =>{
     
     const {displayName,email,phoneNumber,photoUrl,uid} = user;
-
+    console.log(displayName,email);
+    console.log(user);
     const logOut = () =>{
         auth.signOut();
     }

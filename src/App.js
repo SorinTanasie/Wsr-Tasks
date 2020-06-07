@@ -10,35 +10,36 @@ import './App.css';
 
 function App() {
 
-  const [user, setUser] = useState({user: null});
+  const [user, setUser] = useState();
 
   
 
   useEffect(() => {
     auth.onAuthStateChanged(user=>{
-      setUser({user});
+      setUser(user);
+      console.log(user);
     })
-  
   },[])
 
 
   return (
     <div className="App">
       
-      {user.user === null? console.log("nu e"):console.log('e ceva')}
-      {user.user !== null?
+      {user? console.log("nu e"):console.log('e ceva')}
+      {console.log(user)}
+      {user?
       (
       <Router>
-        <Navigation displayName={user.user.displayName} photoUrl={user.user.photoUrl} />
-        
+        <Navigation user={user} />
+        {console.log(user)}
         <Switch>
-          <Route exact path="/" render={()=>(<Homepage user={user.user}/>)}/>
+          <Route exact path="/" render={()=>(<Homepage user={user}/>)}/>
           <Route exact path="/analitics" component={Analitics} />
-          <Route exact path="/user" render={()=>(<User user={user.user}/>)}/>
+          <Route exact path="/user" render={()=>(<User user={user}/>)}/>
         </Switch>
         
       </Router>)
-      : (<Authentification/>)}
+      :(<Authentification/>)}
       
     </div>
   );
