@@ -141,7 +141,7 @@ const User = ({ user }) => {
         <div className={` ${show ? "d-none" : " "}company-members`}>
 
           <div className={`${admin? '':'d-none'}`}>
-              <Button>Adauga angajati</Button>
+              <button>Adauga angajati</button>
               <div className="users">
                 {/* aici sa apara userii in lista dupa ce apesi pe buton si sa i poti adauga comapniei */}
               </div>

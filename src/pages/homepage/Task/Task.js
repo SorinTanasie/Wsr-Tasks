@@ -5,7 +5,7 @@ import TaskModal from './TaskModal/TaskModal';
 const Task = ({index, removeTask, task,modifyTaskDate,modifyTaskDescription,baseId,uid,id}) => {
 
     const [selectedTask, openTaskModal] = useState(false);
-    console.log(uid,id)
+    console.log(task)
 
     const handleOpenModal = e => {
         openTaskModal(e.target);
@@ -31,6 +31,7 @@ const Task = ({index, removeTask, task,modifyTaskDate,modifyTaskDescription,base
                 uid={uid}
                 id={id}
                 baseId={baseId}
+                task={task}
             />
 
             <div className="task">

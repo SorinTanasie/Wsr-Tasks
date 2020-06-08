@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import {firestore} from '../../../../firebase/firebase'
 import "./TaskModal.scss";
 import ModalHeader from "./ModalHeader";
 import DatePicker from 'react-datepicker'
@@ -17,7 +16,8 @@ const TaskModal = ({
   handleCloseModal,
   modifyTaskDate,
   modifyTaskDescription,
-  baseId
+  baseId,
+  task
 }) => {
   const [description, setDescription] = useState();
   const [startDate, setStartDate] = useState(null);
@@ -27,33 +27,16 @@ const TaskModal = ({
       {value? value : 'Due Date'} 
     </button>
   );
+
  
   useEffect(() => {
-
-    if(baseId){
-    
-	
-    const docRef = firestore.collection('users').doc(uid).collection('cards').doc(id).collection('tasks').doc(baseId);
-        
-         docRef.onSnapshot(querySnapshot => {
-        
-        if(querySnapshot.exists){
-        // querySnapshot.forEach(doc => {
-
-        //     tasksArray.push(doc.data());
-        // })
-        setDescription(querySnapshot.data().description);
-        if(querySnapshot.data().dueDate){
-        let time = querySnapshot.data().dueDate.toDate();
-        setStartDate(time);
-        }
+    console.log(task.description)
+    setDescription(task.description)
+    if(task.dueDate){
+      let time = task.dueDate.toDate();
+      setStartDate(time);
     }
-        
-    })
-
-    
-}
-}, [])
+}, [task])
 
 
 
@@ -67,9 +50,8 @@ const TaskModal = ({
 
       console.log("saved!");
       handleCloseModal();
-      console.log(index);
 
-      modifyTaskDescription(index,newDescription);
+      modifyTaskDescription(baseId,newDescription);
 
 
     } else {

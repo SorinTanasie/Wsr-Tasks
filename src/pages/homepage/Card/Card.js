@@ -72,23 +72,11 @@ const Card = ({card,uid,id,removeCard}) => {
 
     }
 
-    const modifyTaskDescription = (id,description) =>{
-        console.log(id)
-        docRef.onSnapshot(querySnapshot => {
-			querySnapshot.forEach(doc => {
-				if(doc.data().id === id) {
-					let key = doc.id;
-                    console.log(key,docRef.doc(),description);
-					docRef.doc(key).update({
-                        description
-                    }).then(() => {
-						console.log('modified: ', key);
-					}).catch(err => {
-						console.log('error');
-					})
-				};
-			});			
-		});
+    const modifyTaskDescription = async (id,description) =>{
+       await docRef.doc(id).get();
+       await docRef.doc(id).update({
+            description
+        })
     }
 
     const modifyTaskDate = (id,dueDate) =>{
