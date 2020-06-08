@@ -33,3 +33,34 @@
     }
 
 }
+
+.organizatie{
+    
+    .create-company{
+        border:0;
+        border-radius: 10px;
+        background-color: purple;
+        padding: 10px 20px;
+        color: white;
+        margin: 20px 0;
+    }
+
+    .d-none{
+        display: none;
+    }
+    .create-company-container{
+        border: 2px solid black;
+        height: 400px;
+        padding: 20px 50px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .submit{
+            margin: 10px;
+            padding: 5px 0px;
+
+        }
+    }
+}
