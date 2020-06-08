@@ -10,6 +10,7 @@
     "firebase": "^7.14.6",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-autocomplete": "^1.8.1",
     "react-datepicker": "^3.0.0",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
