@@ -1,9 +1,8 @@
 import React, { useState } from "react";
+import { auth } from "../../../firebase/firebase";
 
 import FormInput from "../../../components/form-input/form-input.component";
 import CustomButton from "../../../components/button/button.component";
-
-import { auth } from "../../../firebase/firebase";
 
 import "./sign-in.styles.scss";
 
@@ -41,7 +40,8 @@ const SignIn = () => {
           onChange={handleChange}
           label="email"
           required
-        ></FormInput>
+        />
+        
         <FormInput
           type="password"
           name="password"
@@ -49,7 +49,7 @@ const SignIn = () => {
           onChange={handleChange}
           label="password"
           required
-        ></FormInput>
+        />
 
         <CustomButton type="submit" value="Submit">
           Sign in

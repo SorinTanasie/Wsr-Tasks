@@ -1,98 +1,90 @@
-
-import React, {useState, useEffect} from 'react';
-import './homepage.styles.scss';
+import React, { useState, useEffect } from 'react';
+import { firestore } from '../../firebase/firebase';
 
 import AddCard from './Card/AddCard';
 import Card from './Card/Card';
 
-import {firestore} from '../../firebase/firebase';
-const Homepage = ({user}) => {
+import './homepage.styles.scss';
 
-	const [cards, setCard] = useState([
-		
-	]);
-	const {uid} = user;
-	const docRef = firestore.collection('users').doc(uid).collection('cards');
+const Homepage = ({ user }) => {
+	const [ cards, setCard ] = useState([]);
+
+	const { uid } = user;
+	let docRef = firestore.collection('users').doc(uid).collection('cards');
+
 	useEffect(() => {
-		const {uid} = user;
-		const docRef = firestore.collection('users').doc(uid).collection('cards');
-
-		const getTasks = async(docRef) =>{
+		const getTasks = async (docRef) => {
 			const docReff = await docRef;
-			docReff.onSnapshot(querySnapshot => {
+			docReff.onSnapshot((querySnapshot) => {
 				const cardsArray = [];
 
-				querySnapshot.forEach(doc => {
+				querySnapshot.forEach((doc) => {
 					cardsArray.push({
 						title: doc.data().title,
-						id:doc.id});
-					
-				})
+						id: doc.id
+					});
+				});
 				setCard(cardsArray);
-				console.log('mounted')
-			})
-		}
+				// console.log('mounted');
+			});
+		};
 		getTasks(docRef);
-	}, [])
+	}, []);
 
-
-	const addCard = async (title) => {
-
-		if(title.length !== 0) {
-			
-			await docRef.add({title}).then(docRef => {
-				console.log('card written with id: ', docRef.id);;
-			}).catch(err => {
-				console.log('error: ', err);
-			})
+	const handleAddCard = async (title) => {
+		if (title.length !== 0) {
+			await docRef
+				.add({ title })
+				.then((docRef) => {
+					console.log('card written with id: ', docRef.id);
+				})
+				.catch((err) => {
+					console.log('error: ', err);
+				});
 		} else {
 			console.log('error: empty input');
 		}
+	};
 
-	}
-	const removeCard = (id) => {
-
-		docRef.onSnapshot(querySnapshot => {
-			querySnapshot.forEach(doc => {
-				if(doc.id === id) {
+	const handleRemoveCard = (id) => {
+		docRef.onSnapshot((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				if (doc.id === id) {
 					let key = doc.id;
 
-					docRef.doc(key).delete().then(() => {
-						console.log('deleted: ', key);
-					}).catch(err => {
-						console.log('error');
-					})
-
-				};
-			});			
+					docRef
+						.doc(key)
+						.delete()
+						.then(() => {
+							console.log('deleted: ', key);
+						})
+						.catch((err) => {
+							console.log('error');
+						});
+				}
+			});
 		});
-    }
+	};
 
-  	return (
-    	<div className="homepage">
+	return (
+		<div className="homepage">
 			<h1 className="title">Tasks</h1>
 			<div className="board">
-				{console.log(cards)}
-				{
-					cards.map(card => (
-					<Card 
+				{cards.map((card) => (
+					<Card
 						key={card.id}
 						card={card}
 						id={card.id}
 						uid={uid}
-						removeCard={removeCard}
-					/>))
-				}
+						removeCard={handleRemoveCard}
+						docRef={docRef}
+					/>
+				))}
 
-				<AddCard 
-					addCard={addCard} 
-					placeholder="Add new card" 
-				/>
-
+				<AddCard addCard={handleAddCard} placeholder="Add new card" />
 			</div>
-
-    	</div>
-  	);
-}
+		</div>
+	);
+};
 
 export default Homepage;
